@@ -1,0 +1,13 @@
+test:
+ stage: test
+ image: justb4/jmeter:latest
+ script:
+    - echo 'Running JMeter Test'
+    # Ensure JMeter version supports CSV output format
+    - jmeter -v
+    # Run JMeter with CSV output format and include assertion results for debugging
+    - C:/mine/Shwapno_Load_Testing_Project/apache-jmeter-5.6.2/bin/jmeter -n -t ShwapnoLoadTesting.jmx -l result.csv -Jjmeter.save.saveservice.output_format=csv -Jjmeter.save.saveservice.assertion_results=all
+    - jmeter -n -t ShwapnoLoadTesting.jmx -l result.csv -Jjmeter.save.saveservice.output_format=csv -Jjmeter.save.saveservice.assertion_results=all
+ artifacts:
+    paths:
+      - result.csv
